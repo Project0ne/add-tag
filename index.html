@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>替换文本中的链接</title>
+    <style>
+        textarea {
+            width: 1200px;
+            height: 250px;
+            resize: both;
+        }
+    </style>
 </head>
 <body>
     <h2>图片链接替换工具</h2>
     
     <form id="replaceForm">
         <label for="inputLinks">输入链接（多个链接用空格分隔）:</label><br>
-        <textarea id="inputLinks" name="inputLinks" rows="10" cols="50">https://ae01.alicdn.com/kf/S7efa418af0ad43ffad5e8ce44c463d9ed.jpg https://ae01.alicdn.com/kf/S0cb780bbaf3f4665a33d451fda0c892aV.jpg https://ae01.alicdn.com/kf/S18c38e7a645144048c63843e485f934dM.jpg https://ae01.alicdn.com/kf/S11654707b5404b4f9a69b8ecb4c09b3bX.jpg https://ae01.alicdn.com/kf/Se820b083c1f248f2bd1b7b7fc2c3ad5ey.jpg https://ae01.alicdn.com/kf/S7f240229987f483a8215cd242ec2ec6a1.jpg https://ae01.alicdn.com/kf/Sf3eb479f49444a22b3fa7e7248368232j.jpg https://ae01.alicdn.com/kf/S86114aa15d31464094c4a97a18eddb8eA.jpg https://ae01.alicdn.com/kf/S738c459f49d2479183a8f527a76d04307.jpg https://ae01.alicdn.com/kf/Sda103a73b2c9424fa404aeae79e18381G.jpg https://ae01.alicdn.com/kf/Sfebf9b226e494b8094f4663f2be274abc.jpg https://ae01.alicdn.com/kf/S413afa4d84554dcc80787ec0197c3ffeI.jpg https://ae01.alicdn.com/kf/S7ec9b0f753c04fa1a1f562b362e9aeb90.jpg https://ae01.alicdn.com/kf/S045102ff43624fca93b8509bae6dfa43j.jpg https://ae01.alicdn.com/kf/Sb7c14e709726443a83d8db63ec305bcbb.jpg https://ae01.alicdn.com/kf/S386b8a0c59ce472c983bc01e4c798acdJ.jpg https://ae01.alicdn.com/kf/S901027a4077f40eab6eebd0bfdfd3493K.jpg https://ae01.alicdn.com/kf/S429cb1e2fa7e423ba6569019d1e75405L.jpg https://ae01.alicdn.com/kf/S5c75dd58eba9442cab28073bf6c6055ce.jpg https://ae01.alicdn.com/kf/Sd8b979d426a74bd5b092d8fe84c22e8bv.jpg</textarea><br><br>
+        <textarea id="inputLinks" name="inputLinks" rows="10" cols="50"></textarea><br>
+        <button type="button" onclick="clearInput()">清空</button><br><br>
         
         <label for="refText">参考文本:</label><br>
         <input type="text" id="refText" name="refText" value="&lt;img src=&quot;link&quot; /&gt;"><br><br>
@@ -22,10 +30,10 @@
     </form>
     
     <h3>输出:</h3>
-    <div id="output">
-        &lt;img src=&quot;https://ae01.alicdn.com/kf/Sd8b979d426a74bd5b092d8fe84c22e8bv.jpg&quot; /&gt;
-    </div>
-
+    <textarea id="output" readonly></textarea><br>
+    <button type="button" onclick="copyOutput()">复制</button>
+    <button type="button" onclick="cutOutput()">剪切</button>
+    
     <script>
         function replaceText() {
             var inputLinks = document.getElementById('inputLinks').value.split(' ');
@@ -34,10 +42,26 @@
             
             var output = '';
             inputLinks.forEach(link => {
-                output += refText.replace(replaceText, link) + '<br>';
+                output += refText.replace(replaceText, link) + '\n';
             });
             
-            document.getElementById('output').innerHTML = output;
+            document.getElementById('output').value = output;
+        }
+        
+        function clearInput() {
+            document.getElementById('inputLinks').value = '';
+        }
+        
+        function copyOutput() {
+            var output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+        }
+        
+        function cutOutput() {
+            var output = document.getElementById('output');
+            output.select();
+            document.execCommand('cut');
         }
     </script>
 </body>
