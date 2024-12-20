@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片标签生成器</title>
+    <title>标签生成器</title>
 </head>
 <body>
-    <h1>图片标签生成器</h1>
-    <form id="imageForm">
-        <label for="linkInput">输入你的链接：</label>
-        <input type="text" id="linkInput" placeholder="在此处输入图片链接">
-        <button type="button" onclick="generateImgTag()">生成</button>
+    <h1>标签生成器</h1>
+    <form id="tagForm">
+        <label for="templateSelect">选择模板：</label>
+        <select id="templateSelect">
+            <option value="img">图片: &lt;img src="link" /&gt;</option>
+            <option value="video">视频: &lt;video src="link"&gt;&lt;/video&gt;</option>
+        </select>
+        <br>
+        <label for="linkInput">输入要替换的链接：</label>
+        <input type="text" id="linkInput" placeholder="在此处输入链接">
+        <br>
+        <label for="customValueInput">输入自定义文本：</label>
+        <input type="text" id="customValueInput" placeholder="在此处输入自定义文本">
+        <br>
+        <button type="button" onclick="generateTag()">生成</button>
     </form>
     <p id="result"></p>
 
     <script>
-        function generateImgTag() {
+        function generateTag() {
+            var template = document.getElementById('templateSelect').value;
             var link = document.getElementById('linkInput').value;
-            var imgTag = '<img src="' + link + '" />';
-            document.getElementById('result').innerText = imgTag;
+            var customValue = document.getElementById('customValueInput').value;
+            var tag;
+
+            if (template === 'img') {
+                tag = '<img src="' + link + '" ' + customValue + ' />';
+            } else if (template === 'video') {
+                tag = '<video src="' + link + '" ' + customValue + '></video>';
+            }
+
+            document.getElementById('result').innerText = tag;
         }
     </script>
 </body>
