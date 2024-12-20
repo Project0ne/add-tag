@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片标签生成器</title>
+</head>
+<body>
+    <h1>图片标签生成器</h1>
+    <form id="imageForm">
+        <label for="linkInput">输入你的链接：</label>
+        <input type="text" id="linkInput" placeholder="在此处输入图片链接">
+        <button type="button" onclick="generateImgTag()">生成</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        function generateImgTag() {
+            var link = document.getElementById('linkInput').value;
+            var imgTag = '<img src="' + link + '" />';
+            document.getElementById('result').innerText = imgTag;
+        }
+    </script>
+</body>
+</html>
