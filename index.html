@@ -16,7 +16,7 @@
     <h2>图片链接替换工具</h2>
     
     <form id="replaceForm">
-        <label for="inputLinks">输入链接（多个链接用空格分隔）:</label><br>
+        <label for="inputLinks">输入链接（多个链接用空格或换行分隔）:</label><br>
         <textarea id="inputLinks" name="inputLinks" rows="10" cols="50"></textarea><br>
         <button type="button" onclick="clearInput()">清空</button><br><br>
         
@@ -34,7 +34,7 @@
     <script>
         function replaceText() {
             console.log('Function executed');
-            var inputLinks = document.getElementById('inputLinks').value.split(' ');
+            var inputLinks = document.getElementById('inputLinks').value.split(/\s+/);
             var refText = document.getElementById('refText').value;
             
             var output = '';
