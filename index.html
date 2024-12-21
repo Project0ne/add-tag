@@ -23,9 +23,6 @@
         <label for="refText">参考文本:</label><br>
         <input type="text" id="refText" name="refText" value="&lt;img src=&quot;link&quot; /&gt;"><br><br>
         
-        <label for="replaceText">替换文本:</label><br>
-        <input type="text" id="replaceText" name="replaceText" value="link"><br><br>
-        
         <input type="button" value="替换" onclick="replaceText()">
     </form>
     
@@ -38,11 +35,10 @@
         function replaceText() {
             var inputLinks = document.getElementById('inputLinks').value.split(' ');
             var refText = document.getElementById('refText').value;
-            var replaceText = document.getElementById('replaceText').value;
             
             var output = '';
             inputLinks.forEach(link => {
-                output += refText.replace(replaceText, link) + '\n';
+                output += refText.replace('link', link) + '\n';
             });
             
             document.getElementById('output').value = output;
